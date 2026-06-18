@@ -153,7 +153,7 @@ const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month
 const calculateDdayStatus = (targetDateStr: string) => {
   const today = new Date();
   const target = new Date(targetDateStr);
- const diffTime = target.getTime() - today.getTime();
+  const diffTime = target.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   
   if (diffDays < 0) {
