@@ -147,10 +147,10 @@ const dateToYmd = (date: Date) => {
   return `${y}-${m}-${d}`;
 };
 
-const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
-const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
+const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
 
-const calculateDdayStatus = (targetDateStr) => {
+const calculateDdayStatus = (targetDateStr: string) => {
   const today = new Date();
   const target = new Date(targetDateStr);
   const diffTime = target - today;
