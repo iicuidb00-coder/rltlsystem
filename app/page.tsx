@@ -165,7 +165,7 @@ const calculateDdayStatus = (targetDateStr: string) => {
   }
 };
 
-const getRateBadgeStyle = (rate) => {
+const getRateBadgeStyle = (rate: number) => {
   if (rate <= 0) return 'bg-[#1e293b] text-slate-500 border border-slate-800 text-center text-[10px] py-0.5 px-1 rounded font-bold';
   if (rate < 30) {
     return 'bg-rose-600/20 text-rose-400 border border-rose-500/30 text-center text-[10px] py-0.5 px-1 rounded font-bold';
