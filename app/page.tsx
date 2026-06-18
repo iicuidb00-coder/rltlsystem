@@ -165,7 +165,7 @@ const calculateDdayStatus = (targetDateStr: string) => {
   }
 };
 
-const getRateBadgeStyle = (rate: number) => {
+const getRateBadgeStyle = (rate) => {
   if (rate <= 0) return 'bg-[#1e293b] text-slate-500 border border-slate-800 text-center text-[10px] py-0.5 px-1 rounded font-bold';
   if (rate < 30) {
     return 'bg-rose-600/20 text-rose-400 border border-rose-500/30 text-center text-[10px] py-0.5 px-1 rounded font-bold';
@@ -265,7 +265,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   // 심방 관리 자체 검색/필터 상태
   const [counselingSearchText, setCounselingSearchText] = useState('');
 
-  const showToast = (msg: string) => {
+  const showToast = (msg) => {
     setToast({ open: true, message: msg });
     setTimeout(() => setToast({ open: false, message: '' }), 2500);
   };
