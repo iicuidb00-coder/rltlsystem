@@ -321,7 +321,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   const dashboardStats = useMemo(() => {
     const activeRooms = (gospelRooms as any)[activeGospelMonth] || [];
     const total = activeRooms.length;
-    const submitted = activeRooms.filter(r => r.cardSubmitted).length;
+    const submitted = activeRooms.filter((r: any) => r.cardSubmitted).length;
     const rate = total > 0 ? Math.round((submitted / total) * 100) : 0;
     return { activeRoomsCount: total, submittedCards: submitted, cardSubmissionRate: rate };
   }, [gospelRooms, activeGospelMonth]);
