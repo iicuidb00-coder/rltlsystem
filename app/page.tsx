@@ -138,9 +138,9 @@ const INITIAL_TEACHERS_ATTENDANCE = {
 // 전역 요일 상수 및 정적 유틸리티 함수 정의 (ReferenceError 방지)
 const weekdays = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
-const getWeekdayName = (date) => weekdays[date.getDay()];
+const getWeekdayName = (date: Date) => weekdays[date.getDay()];
 
-const dateToYmd = (date) => {
+const dateToYmd = (date: Date) => {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
   const d = String(date.getDate()).padStart(2, '0');
