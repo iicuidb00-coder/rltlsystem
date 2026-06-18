@@ -265,7 +265,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   // 심방 관리 자체 검색/필터 상태
   const [counselingSearchText, setCounselingSearchText] = useState('');
 
-  const showToast = (msg) => {
+  const showToast = (msg: string) => {
     setToast({ open: true, message: msg });
     setTimeout(() => setToast({ open: false, message: '' }), 2500);
   };
