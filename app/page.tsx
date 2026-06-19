@@ -1744,7 +1744,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                     <div className="flex items-center space-x-2 bg-slate-900 p-1.5 rounded-xl border border-slate-800 text-xs">
                       <input type="date" defaultValue="2026-06-25" id="new_meeting_ymd" className="bg-slate-950 border border-slate-700 text-white rounded-lg p-1 text-xs font-bold focus:outline-none" />
                       <button onClick={() => {
-                        const val = document.getElementById('new_meeting_ymd').value; if (!val) return;
+                        const val = (document.getElementById('new_meeting_ymd') as HTMLInputElement).value; if (!val) return;
                         if (teacherMeetings.includes(val)) { showToast('⚠️ 이미 생성된 회차 날짜입니다.'); return; }
                         setTeacherMeetings(prev => [val, ...prev]); showToast(`📅 ${val} 교사 모임 출석부가 추가되었습니다.`);
                       }} className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold py-1 px-3 rounded-lg text-xs">모임 추가</button>
