@@ -1870,10 +1870,10 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                       </div>
                       <input type="text" placeholder="전화번호" id="add_t_phone" className="w-full bg-slate-950 border border-slate-700 rounded-lg p-1.5 text-white font-bold focus:outline-none" />
                       <button onClick={() => {
-                        const name = document.getElementById('add_t_name').value; const role = document.getElementById('add_t_role').value; const phone = document.getElementById('add_t_phone').value || '010-0000-0000';
+                        const name = (document.getElementById('add_t_name') as HTMLInputElement).value; const role = (document.getElementById('add_t_role') as HTMLInputElement).value; const phone = (document.getElementById('add_t_phone') as HTMLInputElement).value || '010-0000-0000';
                         if (!name) { showToast('⚠️ 성명을 작성해 주세요.'); return; }
                         setTeachers(prev => [...prev, { id: 't_' + Date.now(), name, phone, role, status: '활동중' }]);
-                        document.getElementById('add_t_name').value = ''; document.getElementById('add_t_phone').value = ''; showToast(`👤 [${name}] 교사가 명단에 편입되었습니다.`);
+                        (document.getElementById('add_t_name') as HTMLInputElement).value = ''; (document.getElementById('add_t_phone') as HTMLInputElement).value = ''; showToast(`👤 [${name}] 교사가 명단에 편입되었습니다.`);
                       }} className="w-full bg-slate-800 hover:bg-slate-855 text-slate-200 border border-slate-750 font-bold py-1.5 rounded-lg">신임 임명 완료</button>
                     </div>
                   </div>
