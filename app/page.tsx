@@ -342,8 +342,8 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
     let totalPluckingActual = 0;
     let totalGospelActual = 0;
 
-    const accumSheets = (sheets) => {
-      Object.values(sheets).forEach(sheet => {
+   const accumSheets = (sheets: any) => {
+      Object.values(sheets).forEach((sheet: any) => {
         if (String(sheet.year) === activeSfYear && String(sheet.month) === activeSfMonth) {
           sheet.members.forEach(m => {
             ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach(day => {
