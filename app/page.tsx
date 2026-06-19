@@ -1546,7 +1546,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                           <td className="py-2 px-2 text-center">
                             <button type="button" onClick={() => handleUpdateGospelRow(item.id, 'cardSubmitted', !item.cardSubmitted)} className={`px-3 py-1.5 rounded-full text-[10px] font-black ${item.cardSubmitted ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}`}>{item.cardSubmitted ? 'O' : 'X'}</button>
                           </td>
-                          <td className="py-2 px-2"><textarea rows="2" value={item.memo || ''} onChange={(e) => handleUpdateGospelRow(item.id, 'memo', e.target.value)} className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 w-full text-slate-300 text-xs min-h-[45px] resize-y" placeholder="기록 사항 메모..." /></td>
+                          <td className="py-2 px-2"><textarea rows={2} value={item.memo || ''} onChange={(e) => handleUpdateGospelRow(item.id, 'memo', e.target.value)} className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 w-full text-slate-300 text-xs min-h-[45px] resize-y" placeholder="기록 사항 메모..." /></td>
                           <td className="py-2 px-2 text-center">
                             <button onClick={() => { setGospelRooms(prev => ({ ...prev, [activeGospelMonth]: prev[activeGospelMonth].filter(row => row.id !== item.id) })); showToast('🗑/ 복음방 성도가 제거되었습니다.'); }} className="text-slate-600 hover:text-rose-400 p-1.5"><Trash2 className="h-4 w-4" /></button>
                           </td>
@@ -2109,7 +2109,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
               </div>
               <div>
                 <label className="block text-slate-400 mb-1 font-bold">심방 내용 및 후속 대책</label>
-                <textarea rows="4" value={editingCounseling.content} onChange={(e) => setEditingCounseling(prev => ({ ...prev, content: e.target.value }))} className="w-full bg-slate-950 border border-slate-700 text-slate-200 rounded-xl p-3 focus:outline-none" />
+                <textarea rows={4} value={editingCounseling.content} onChange={(e) => setEditingCounseling(prev => ({ ...prev, content: e.target.value }))} className="w-full bg-slate-950 border border-slate-700 text-slate-200 rounded-xl p-3 focus:outline-none" />
               </div>
             </div>
             <div className="flex justify-end space-x-2 pt-3 border-t border-slate-750">
