@@ -2172,7 +2172,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                 <label className="block text-slate-400 mb-1 font-bold">심방자 입력 (교사 빠른 선택 가능)</label>
                 <div className="flex gap-2">
                   <input id="form_counselor_name_input" name="counselorName" type="text" placeholder="심방자 이름 기입..." className="flex-1 bg-slate-950 border border-slate-700 text-white rounded-lg p-1.5 focus:outline-none font-bold" />
-                  <select onChange={(e) => { if (e.target.value) document.getElementById('form_counselor_name_input').value = e.target.value; }} className="bg-slate-900 border border-slate-700 text-slate-300 rounded-lg px-2 text-xs font-bold focus:outline-none">
+                  <select onChange={(e) => { if (e.target.value) (document.getElementById('form_counselor_name_input') as HTMLInputElement).value = e.target.value; }} className="bg-slate-900 border border-slate-700 text-slate-300 rounded-lg px-2 text-xs font-bold focus:outline-none">
                     <option value="">-- 교사 선택 --</option>
                     {teachers.map(t => <option key={t.id} value={t.name}>{t.name} ({t.role})</option>)}
                   </select>
