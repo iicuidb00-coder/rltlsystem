@@ -290,6 +290,8 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
     return null;
   };
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   // 초기 데이터 Firebase에서 불러오기
   useEffect(() => {
     const loadAll = async () => {
@@ -307,18 +309,19 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
       if (ep) setEducationPrograms(ep);
       const ea = await loadFromFirebase('educationAttendance');
       if (ea) setEducationAttendance(ea);
+      setIsLoaded(true);
     };
     loadAll();
   }, []);
 
-  // 데이터 변경시 Firebase에 자동 저장
-  useEffect(() => { saveToFirebase('teachers', teachers); }, [teachers]);
-  useEffect(() => { saveToFirebase('gospelRooms', gospelRooms); }, [gospelRooms]);
-  useEffect(() => { saveToFirebase('counselingReports', counselingReports); }, [counselingReports]);
-  useEffect(() => { saveToFirebase('teacherMeetings', teacherMeetings); }, [teacherMeetings]);
-  useEffect(() => { saveToFirebase('teachersAttendance', teachersAttendance); }, [teachersAttendance]);
-  useEffect(() => { saveToFirebase('educationPrograms', educationPrograms); }, [educationPrograms]);
-  useEffect(() => { saveToFirebase('educationAttendance', educationAttendance); }, [educationAttendance]);
+  // 데이터 변경시 Firebase에 자동 저장 (불러오기 완료 후에만)
+  useEffect(() => { if (isLoaded) saveToFirebase('teachers', teachers); }, [teachers, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('gospelRooms', gospelRooms); }, [gospelRooms, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('counselingReports', counselingReports); }, [counselingReports, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('teacherMeetings', teacherMeetings); }, [teacherMeetings, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('teachersAttendance', teachersAttendance); }, [teachersAttendance, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('educationPrograms', educationPrograms); }, [educationPrograms, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('educationAttendance', educationAttendance); }, [educationAttendance, isLoaded]);
 
 
   const showToast = (msg: string) => {
