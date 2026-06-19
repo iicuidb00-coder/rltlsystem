@@ -1366,7 +1366,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800 font-semibold text-slate-200">
-                      {monthlyAggregatedStats.map(item => {
+                      {monthlyAggregatedStats.map((item: any) => {
                         const fRate = item.finding.goal > 0 ? Math.round((item.finding.actual / item.finding.goal) * 100) : 0;
                         const pRate = item.plucking.goal > 0 ? Math.round((item.plucking.actual / item.plucking.goal) * 100) : 0;
                         const gRate = item.gospel.goal > 0 ? Math.round((item.gospel.actual / item.gospel.goal) * 100) : 0;
