@@ -632,7 +632,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   }, [filteredSheetsForMonth, activeSfType]);
 
   const computedTopRankings = useMemo(() => {
-    return monthlyAggregatedStats.map(item => {
+    return monthlyAggregatedStats.map((item: any) => {
       const f = item.finding.actual;
       const p = item.plucking.actual;
       const g = item.gospel.actual;
