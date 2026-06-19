@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 
 // 초기 교사 명단
-const INITIAL_TEACHERS = [
+const INITIAL_TEACHERS: any[] = [
   { id: 't1', name: '김선교', phone: '010-1234-5678', role: '부장', status: '활동중' },
   { id: 't2', name: '이순종', phone: '010-8765-4321', role: '교관', status: '활동중' },
   { id: 't3', name: '박사랑', phone: '010-1111-2222', role: '정교사2', status: '활동중' },
