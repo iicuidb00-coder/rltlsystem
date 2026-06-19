@@ -1901,7 +1901,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
               <div className="flex justify-end space-x-2 pt-2 border-t border-slate-700">
                 <button onClick={() => setIsNewMonthModalOpen(false)} className="bg-slate-700 text-slate-300 px-4 py-2 rounded-xl font-bold">취소</button>
                 <button onClick={() => {
-                  const val = document.getElementById('gospel_new_month_input').value; if (!val) return;
+                  const val = (document.getElementById('gospel_new_month_input') as HTMLInputElement).value; if (!val) return;
                   if (gospelRooms[val]) { showToast('⚠️ 이미 존재하는 세션 연월입니다.'); return; }
                   setGospelRooms(prev => ({ ...prev, [val]: [] })); setActiveGospelMonth(val); setIsNewMonthModalOpen(false); showToast(`📂 [${val}] 신규 복음방 전용 시트가 개설되었습니다.`);
                 }} className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-xl font-bold">생성</button>
