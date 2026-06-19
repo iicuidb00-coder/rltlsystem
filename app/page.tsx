@@ -2152,8 +2152,8 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
               <button onClick={() => setIsCounselingModalOpen(false)} className="text-slate-400 hover:text-white">✕</button>
             </div>
             <form onSubmit={(e) => {
-              e.preventDefault(); const dateVal = e.target.counselingDate.value || currentSelectedYmd; const calculated = getWeekdayName(new Date(dateVal));
-              const counselor = e.target.counselorName.value; const target = e.target.target.value; const content = e.target.content.value;
+              e.preventDefault(); const dateVal = (e.target as any).counselingDate.value || currentSelectedYmd; const calculated = getWeekdayName(new Date(dateVal));
+              const counselor = (e.target as any).counselorName.value; const target = (e.target as any).target.value; const content = (e.target as any).content.value;
               if (!counselor || !target || !content) { showToast('⚠️ 모든 항목을 작성해주세요.'); return; }
               setCounselingReports(prev => [{ id: 'c_' + Date.now(), dept: '광복부', date: dateVal, dayOfWeek: calculated, counselor, target, content }, ...prev]);
               setIsCounselingModalOpen(false); showToast(`📝 ${target} 성도의 심방보고가 등록되었습니다.`);
