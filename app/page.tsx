@@ -1491,13 +1491,13 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                   <div>
                     <select value={gospelFilters.leader} onChange={(e) => setGospelFilters(prev => ({ ...prev, leader: e.target.value }))} className="w-full bg-slate-950 border border-slate-700 rounded-xl py-2 px-2.5 text-xs text-slate-300 focus:outline-none">
                       <option value="전체">전체 인도자</option>
-                      {uniqueGospelLeaders.filter(l => l !== '전체').map(l => <option key={l} value={l}>{l}</option>)}
+                      {uniqueGospelLeaders.filter((l: any) => l !== '전체').map((l: any) => <option key={l} value={l}>{l}</option>)}
                     </select>
                   </div>
                   <div>
                     <select value={gospelFilters.country} onChange={(e) => setGospelFilters(prev => ({ ...prev, country: e.target.value }))} className="w-full bg-slate-950 border border-slate-700 rounded-xl py-2 px-2.5 text-xs text-slate-300 focus:outline-none">
                       <option value="전체">전체 국가</option>
-                      {uniqueGospelCountries.filter(c => c !== '전체').map(c => <option key={c} value={c}>{c}</option>)}
+                      {uniqueGospelCountries.filter((c: any) => c !== '전체').map((c: any) => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                   <div>
