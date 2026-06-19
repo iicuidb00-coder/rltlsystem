@@ -2180,7 +2180,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
               </div>
               <div>
                 <label className="block text-slate-400 mb-1 font-bold">내용 및 방법</label>
-                <textarea name="content" rows="4" className="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2 focus:outline-none" />
+                <textarea name="content" rows={4} className="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2 focus:outline-none" />
               </div>
               <div className="flex justify-end space-x-2 pt-2 border-t border-slate-700">
                 <button type="button" onClick={() => setIsCounselingModalOpen(false)} className="bg-slate-700 text-slate-300 px-4 py-1.5 rounded-lg font-bold">취소</button>
