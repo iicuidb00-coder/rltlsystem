@@ -1,5 +1,7 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
+import { db } from './firebase';
+import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { 
   LayoutDashboard, 
   ShieldAlert, 
@@ -265,6 +267,59 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
 
   // 심방 관리 자체 검색/필터 상태
   const [counselingSearchText, setCounselingSearchText] = useState('');
+  
+  // Firebase 저장 함수
+  const saveToFirebase = async (key: string, data: any) => {
+    try {
+      await setDoc(doc(db, 'rltlsystem', key), { data: JSON.stringify(data) });
+    } catch (e) {
+      console.error('Firebase 저장 오류:', e);
+    }
+  };
+
+  // Firebase 불러오기 함수
+  const loadFromFirebase = async (key: string) => {
+    try {
+      const docSnap = await getDoc(doc(db, 'rltlsystem', key));
+      if (docSnap.exists()) {
+        return JSON.parse(docSnap.data().data);
+      }
+    } catch (e) {
+      console.error('Firebase 불러오기 오류:', e);
+    }
+    return null;
+  };
+
+  // 초기 데이터 Firebase에서 불러오기
+  useEffect(() => {
+    const loadAll = async () => {
+      const t = await loadFromFirebase('teachers');
+      if (t) setTeachers(t);
+      const gr = await loadFromFirebase('gospelRooms');
+      if (gr) setGospelRooms(gr);
+      const cr = await loadFromFirebase('counselingReports');
+      if (cr) setCounselingReports(cr);
+      const tm = await loadFromFirebase('teacherMeetings');
+      if (tm) setTeacherMeetings(tm);
+      const ta = await loadFromFirebase('teachersAttendance');
+      if (ta) setTeachersAttendance(ta);
+      const ep = await loadFromFirebase('educationPrograms');
+      if (ep) setEducationPrograms(ep);
+      const ea = await loadFromFirebase('educationAttendance');
+      if (ea) setEducationAttendance(ea);
+    };
+    loadAll();
+  }, []);
+
+  // 데이터 변경시 Firebase에 자동 저장
+  useEffect(() => { saveToFirebase('teachers', teachers); }, [teachers]);
+  useEffect(() => { saveToFirebase('gospelRooms', gospelRooms); }, [gospelRooms]);
+  useEffect(() => { saveToFirebase('counselingReports', counselingReports); }, [counselingReports]);
+  useEffect(() => { saveToFirebase('teacherMeetings', teacherMeetings); }, [teacherMeetings]);
+  useEffect(() => { saveToFirebase('teachersAttendance', teachersAttendance); }, [teachersAttendance]);
+  useEffect(() => { saveToFirebase('educationPrograms', educationPrograms); }, [educationPrograms]);
+  useEffect(() => { saveToFirebase('educationAttendance', educationAttendance); }, [educationAttendance]);
+
 
   const showToast = (msg: string) => {
     setToast({ open: true, message: msg });
