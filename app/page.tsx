@@ -309,6 +309,18 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
       if (ep) setEducationPrograms(ep);
       const ea = await loadFromFirebase('educationAttendance');
       if (ea) setEducationAttendance(ea);
+      const fw = await loadFromFirebase('frontWeeklySheets');
+      if (fw) setFrontWeeklySheets(fw);
+      const rw = await loadFromFirebase('rearWeeklySheets');
+      if (rw) setRearWeeklySheets(rw);
+      const sc = await loadFromFirebase('sfCenterGoals');
+      if (sc) setSfCenterGoals(sc);
+      const sd = await loadFromFirebase('sfDdays');
+      if (sd) setSfDdays(sd);
+      const dc = await loadFromFirebase('dailyCounts');
+      if (dc) setDailyCounts(dc);
+      const cg = await loadFromFirebase('counselingGoals');
+      if (cg) setCounselingGoals(cg);
       setIsLoaded(true);
     };
     loadAll();
@@ -322,6 +334,12 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   useEffect(() => { if (isLoaded) saveToFirebase('teachersAttendance', teachersAttendance); }, [teachersAttendance, isLoaded]);
   useEffect(() => { if (isLoaded) saveToFirebase('educationPrograms', educationPrograms); }, [educationPrograms, isLoaded]);
   useEffect(() => { if (isLoaded) saveToFirebase('educationAttendance', educationAttendance); }, [educationAttendance, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('frontWeeklySheets', frontWeeklySheets); }, [frontWeeklySheets, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('rearWeeklySheets', rearWeeklySheets); }, [rearWeeklySheets, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('sfCenterGoals', sfCenterGoals); }, [sfCenterGoals, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('sfDdays', sfDdays); }, [sfDdays, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('dailyCounts', dailyCounts); }, [dailyCounts, isLoaded]);
+  useEffect(() => { if (isLoaded) saveToFirebase('counselingGoals', counselingGoals); }, [counselingGoals, isLoaded]);
 
 
   const showToast = (msg: string) => {
