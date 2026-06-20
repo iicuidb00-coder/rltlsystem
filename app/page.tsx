@@ -219,8 +219,13 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   const [activeCounselingYm, setActiveCounselingYm] = useState('2026-06');
 
   
-  const [activeMenu, setActiveMenu] = useState('dashboard');
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 5, 16)); // 2026-06-16 기준
+  const [activeMenu, setActiveMenu('dashboard')] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('activeMenu') || 'dashboard';
+    }
+    return 'dashboard';
+  });
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [toast, setToast] = useState({ open: false, message: '' });
   const [activeGospelMonth, setActiveGospelMonth] = useState('2026-06');
   const [searchText, setSearchText] = useState('');
@@ -341,6 +346,11 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   useEffect(() => { if (isLoaded) saveToFirebase('dailyCounts', dailyCounts); }, [dailyCounts, isLoaded]);
   useEffect(() => { if (isLoaded) saveToFirebase('counselingGoals', counselingGoals); }, [counselingGoals, isLoaded]);
 
+
+  const handleMenuChange = (menu: string) => {
+    setActiveMenu('dashboard')(menu);
+    sessionStorage.setItem('activeMenu', menu);
+  };
 
   const showToast = (msg: string) => {
     setToast({ open: true, message: msg });
@@ -956,7 +966,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
         {/* MENUS (라우팅 바인딩 교정) */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           <button 
-            onClick={() => setActiveMenu('dashboard')}
+            onClick={() => setActiveMenu('dashboard')('dashboard')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'dashboard' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'}`}
           >
             <LayoutDashboard className="h-4 w-4" />
@@ -964,7 +974,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
           </button>
 
           <button 
-            onClick={() => setActiveMenu('specialForce')}
+            onClick={() => setActiveMenu('dashboard')('specialForce')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'specialForce' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'}`}
           >
             <ShieldAlert className="h-4 w-4 text-amber-500" />
@@ -972,7 +982,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
           </button>
 
           <button 
-            onClick={() => setActiveMenu('gospelRoom')}
+            onClick={() => setActiveMenu('dashboard')('gospelRoom')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'gospelRoom' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800'}`}
           >
             <BookOpen className="h-4 w-4 text-emerald-400" />
@@ -980,7 +990,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
           </button>
 
           <button 
-            onClick={() => setActiveMenu('education')}
+            onClick={() => setActiveMenu('dashboard')('education')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'education' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800'}`}
           >
             <TrendingUp className="h-4 w-4 text-indigo-400" />
@@ -988,7 +998,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
           </button>
 
           <button 
-            onClick={() => setActiveMenu('counseling')}
+            onClick={() => setActiveMenu('dashboard')('counseling')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'counseling' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800'}`}
           >
             <FileText className="h-4 w-4 text-rose-400" />
@@ -996,7 +1006,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
           </button>
 
           <button 
-            onClick={() => setActiveMenu('attendance')}
+            onClick={() => setActiveMenu('dashboard')('attendance')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${activeMenu === 'attendance' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800'}`}
           >
             <Users className="h-4 w-4 text-sky-400" />
