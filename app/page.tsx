@@ -216,7 +216,10 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   });
 
   // 심방 관리 전용 활성화 연월 상태
-  const [activeCounselingYm, setActiveCounselingYm] = useState('2026-06');
+  const [activeCounselingYm, setActiveCounselingYm] = useState(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  });
 
   
   const [activeMenu, setActiveMenu] = useState(() => {
@@ -227,13 +230,15 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
   });
   const [currentDate, setCurrentDate] = useState(new Date());
   const [toast, setToast] = useState({ open: false, message: '' });
-  const [activeGospelMonth, setActiveGospelMonth] = useState('2026-06');
+  const [activeGospelMonth, setActiveGospelMonth] = useState(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  });
   const [searchText, setSearchText] = useState('');
 
   // 특전대 전도대장 년/월 스위처 상태
-  const [activeSfYear, setActiveSfYear] = useState('2026');
-  const [activeSfMonth, setActiveSfMonth] = useState('5');
-
+  const [activeSfYear, setActiveSfYear] = useState(String(new Date().getFullYear()));
+  const [activeSfMonth, setActiveSfMonth] = useState(String(new Date().getMonth() + 1));
   // 디데이 추가 입력을 위한 상태
   const [newDdayCountry, setNewDdayCountry] = useState('');
   const [newDdayDate, setNewDdayDate] = useState('');
