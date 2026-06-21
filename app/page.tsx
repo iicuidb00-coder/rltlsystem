@@ -428,9 +428,13 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
     let totalPluckingActual = 0;
     let totalGospelActual = 0;
 
-   const accumSheets = (sheets: any) => {
+   const dashboardYear = String(currentDate.getFullYear());
+    const dashboardMonth = String(currentDate.getMonth() + 1);
+    const dashboardYm = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
+
+    const accumSheets = (sheets: any) => {
       Object.values(sheets).forEach((sheet: any) => {
-        if (String(sheet.year) === activeSfYear && String(sheet.month) === activeSfMonth) {
+        if (String(sheet.year) === dashboardYear && String(sheet.month) === dashboardMonth) {
           sheet.members.forEach(m => {
             ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach(day => {
               totalFindingActual += (m.daily[day]?.finding || 0);
@@ -451,7 +455,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
     const totalTargetCard = parseInt(sfCenterGoals.card.text) || 20;
 
     // 복음방 카드 제출 실제 건수 산출
-    const currentMonthGospelRooms = gospelRooms[activeGospelMonth] || [];
+    const currentMonthGospelRooms = (gospelRooms as any)[dashboardYm] || [];
     const totalCardActual = currentMonthGospelRooms.filter(r => r.cardSubmitted).length;
 
     // 비율 (100% 한계 해제)
@@ -461,8 +465,8 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
     const cardRate = totalTargetCard > 0 ? Math.round((totalCardActual / totalTargetCard) * 100) : 0;
 
     // 2. 심방 (Counseling) 달성률 (동적 목표 반영, 100% 한계 해제)
-    const targetCounselingCount = counselingGoals[activeCounselingYm] || 8;
-    const currentMonthCounselings = counselingReports.filter(c => c.date.startsWith(activeCounselingYm));
+    const targetCounselingCount = (counselingGoals as any)[dashboardYm] || 8;
+    const currentMonthCounselings = counselingReports.filter(c => c.date.startsWith(dashboardYm));
     const counselingRate = targetCounselingCount > 0 ? Math.round((currentMonthCounselings.length / targetCounselingCount) * 100) : 0;
 
     // 3. 교육 (Education) 달성률
@@ -505,7 +509,7 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
       counselingGoal: targetCounselingCount,
       education: educationRate
     };
-  }, [frontWeeklySheets, rearWeeklySheets, activeSfYear, activeSfMonth, sfCenterGoals, gospelRooms, activeGospelMonth, counselingReports, educationPrograms, educationAttendance, activeCounselingYm, counselingGoals]);
+  }, [frontWeeklySheets, rearWeeklySheets, currentDate, sfCenterGoals, gospelRooms, counselingReports, educationPrograms, educationAttendance, counselingGoals]);
 
   const selectedDateEduInfo = useMemo(() => {
     const matchedProgs = educationPrograms.filter(prog => prog.dates.includes(currentSelectedYmd));
