@@ -1900,20 +1900,19 @@ const [sfCenterGoals, setSfCenterGoals] = useState({
                     <h4 className="text-xs font-bold text-white mb-3 flex items-center space-x-2 pb-1.5 border-b border-slate-700"><User className="text-slate-450 h-4 w-4" /><span>교사 인명 대장</span></h4>
                     <div className="space-y-1.5 max-h-[160px] overflow-y-auto pr-2">
                       {teachers.map(t => (
-                        <button key={t.id} onClick={() => {
-                          const total = teacherMeetings.length; let attend = 0;
-                          teacherMeetings.forEach(ymd => { const att = teachersAttendance[ymd]?.[t.id]; if (att?.attended || att?.homework) attend++; });
-                          const rate = total > 0 ? Math.round((attend / total) * 100) : 0;
-                          t.computedStats = { total, attend, rate };
-                          setTeachers(prev => prev.map(item => item.id === t.id ? { ...item, computedStats: t.computedStats, focusActive: true } : { ...item, focusActive: false }));
-                        }} className={`p-2.5 rounded-xl border w-full text-left transition-all flex justify-between items-center ${t.focusActive ? 'bg-slate-800 border-indigo-500' : 'bg-slate-900 border-slate-800'}`}>
-                          <div className="flex items-center gap-1.5 font-bold">
+                        <div key={t.id} className={`p-2.5 rounded-xl border transition-all flex justify-between items-center ${t.focusActive ? 'bg-slate-800 border-indigo-500' : 'bg-slate-900 border-slate-800'}`}>
+                          <button onClick={() => {
+                            const total = teacherMeetings.length; let attend = 0;
+                            teacherMeetings.forEach(ymd => { if (teachersAttendance[ymd]?.[t.id]?.attended) attend++; });
+                            const rate = total > 0 ? Math.round((attend / total) * 100) : 0;
+                            t.computedStats = { total, attend, rate };
+                            setTeachers(prev => prev.map(item => item.id === t.id ? { ...item, computedStats: t.computedStats, focusActive: true } : { ...item, focusActive: false }));
+                          }} className="flex-1 text-left flex items-center gap-1.5 font-bold">
                             <User className="h-3.5 w-3.5 text-slate-500" />
                             <div><span className="text-xs font-black text-white">{t.name}</span><span className="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded-lg ml-2 border border-slate-800">{t.role}</span></div>
-                          </div>
-                          <Clock className="h-3.5 w-3.5 text-slate-500" />
-                        </button>
-                      ))}
+                          </button>
+                          <button onClick={() => { setTeachers(prev => prev.filter(item => item.id !== t.id)); showToast(`🗑️ [${t.name}] 교사가 명단에서 삭제되었습니다.`); }} className="text-slate-500 hover:text-rose-400 p-1 ml-1"><Trash2 className="h-3.5 w-3.5" /></button>
+                        </div>                      ))}
                     </div>
                   </div>
 
